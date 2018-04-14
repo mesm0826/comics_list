@@ -8,5 +8,7 @@ app_name = 'comics_list_app'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^login$', auth_views.login, {'template_name': 'comics_list_app/login.html'}, name='login'),
-    url(r'^logout$', auth_views.logout, name='logout'),
+    url(r'^add$', views.edit, name='add'),
+    url(r'^edit/(?P<id>\d+)/$', views.edit, name='edit'),
+    url(r'^delete/(?P<id>\d+)/$', views.delete, name='delete'),
 ]
