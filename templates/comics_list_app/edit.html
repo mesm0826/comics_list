@@ -1,0 +1,20 @@
+{% extends "comics_list_app/base.html" %}
+
+{% block title %}編集画面{% endblock title %}
+
+{% block content %}
+    {% if id %}
+        <h3 class="page-header">会員の編集</h3>
+        <form action="{% url 'comics_list_app:edit' id=id %}" method="post" class="form-horizontal" role="form">
+    {% else %}
+        <h3 class="page-header">会員の登録</h3>
+        <form action="{% url 'comics_list_app:add' %}" method="post" class="form-horizontal" role="form">
+    {% endif %}
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary">送信</button>
+
+    </form>
+    </form>
+    <a href="{% url 'comics_list_app:index' %}" class="btn btn-default btn-sm">戻る</a>
+{% endblock content %}
