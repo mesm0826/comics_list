@@ -7,14 +7,14 @@ from .forms import ComicsListForm
 
 @login_required
 def index(request):
-
-    comics_info_list = get_comics_info_list()
+    username = str(request.user)
+    request.session['username'] = username
+    comics_info_list = get_comics_info_list(username)
     return render(request, 'comics_list_app/index.html', comics_info_list)
 
 
 def edit(request, id=None):
-    form_class = ComicsListForm
-    form = form_class(request.POST or None)
+
     if id:  # idがあるとき（編集の時）
         # idで検索して、結果を戻すか、404エラー
         comics_list = get_object_or_404(ComicsList, pk=id)
@@ -30,7 +30,10 @@ def edit(request, id=None):
             comics_list.save()
             return redirect('comics_list_app:index')
     else:  # GETの時（フォームを生成）
-        form = ComicsListForm(instance=comics_list)
+        form = ComicsListForm(instance=comics_list, initial={
+            'username': request.session.get('username')
+           })
+        print('GET:', form)
     return render(request, 'comics_list_app/edit.html', dict(form=form, id=id))
 
 
@@ -41,8 +44,8 @@ def delete(request, id):
     return redirect('comics_list_app:index')
 
 
-def get_comics_info_list():
+def get_comics_info_list(username):
     comics_info_list = {
-        'comics_list': ComicsList.objects.all().order_by('id')
+        'comics_list': ComicsList.objects.filter(username=username).order_by('title')
     }
     return comics_info_list

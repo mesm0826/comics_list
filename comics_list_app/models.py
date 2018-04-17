@@ -102,7 +102,7 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
     objects = AuthUserManager()
 
     def __str__(self):
-        return self.last_name + ' ' + self.first_name
+        return self.username
 
 
 class ComicsList(models.Model):
@@ -115,4 +115,3 @@ class ComicsList(models.Model):
 
     def __str__(self):
         return self.title
-

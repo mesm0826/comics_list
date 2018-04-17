@@ -1,9 +1,10 @@
-<form method="post" action="{% url 'comics_list_app:login' %}">
+
+<form action="{% url 'comics_list_app:login' %}" method="post">
     {% csrf_token %}
-    {{ form.non_field_errors }}
-    {{ form.errors.username }}
-    {{ form.username }}
-    {{ form.errors.password }}
-    {{ form.password }}
-    <input type="submit" value="Login">
+    {% if next %}
+    <input type="hidden" name="next" value="{{ next }}" />
+    {% endif %}
+    <input type="text" name="username" placeholder="ユーザID">
+    <input type="password" name="password" placeholder="パスワード">
+    <button type="submit" name="Login">ログイン</button>
 </form>

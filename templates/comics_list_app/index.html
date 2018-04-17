@@ -10,7 +10,6 @@
     <table border="1">
         <thead>
             <tr>
-                <th>No</th>
                 <th>Title</th>
                 <th>volume</th>
                 <th>created_at</th>
@@ -21,10 +20,9 @@
         <tbody>
         {% for comic_info in comics_list %}
             <tr>
-                <td>{{ comic_info.id }}</td>
                 <td>{{ comic_info.title }}</td>
                 <td>{{ comic_info.volume }}</td>
-                <td>{{ comic_info.updated_at }}</td>
+                <td>{{ comic_info.created_at }}</td>
                 <td>{{ comic_info.updated_at }}</td>
                 <td>
                     <a href="{% url 'comics_list_app:edit' id=comic_info.id %}" class="btn btn-primary btn-sm">編集</a>
