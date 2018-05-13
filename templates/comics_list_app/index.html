@@ -1,13 +1,12 @@
 {% extends "comics_list_app/base.html" %}
 {% block title %}
-一覧を表示する予定
+My Comics List
 {% endblock title %}
 
 {% block content %}
-    <h3>一覧表示</h3>
-    <a href="{% url 'comics_list_app:add' %}" class="btn btn-primary btn-sm">追加</a>
+    <a href="{% url 'comics_list_app:add' %}" class="btn btn-primary btn-sm">Add</a>
 
-    <table border="1">
+    <table class="tbl_comics_list">
         <thead>
             <tr>
                 <th>Title</th>
@@ -25,8 +24,9 @@
                 <td>{{ comic_info.created_at }}</td>
                 <td>{{ comic_info.updated_at }}</td>
                 <td>
-                    <a href="{% url 'comics_list_app:edit' id=comic_info.id %}" class="btn btn-primary btn-sm">編集</a>
-                    <a href="{% url 'comics_list_app:delete' id=comic_info.id %}" class="btn btn-primary btn-sm" id="btn_del">削除</a>
+                    <a href="{% url 'comics_list_app:edit' id=comic_info.id %}" class="btn btn-primary btn-sm">Edit</a>
+                    <br>
+                    <a href="{% url 'comics_list_app:delete' id=comic_info.id %}" class="btn btn-primary btn-sm" id="btn_del">Delete</a>
                 </td>
             </tr>
         {% endfor %}

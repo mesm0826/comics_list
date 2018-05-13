@@ -1,22 +1,36 @@
 {% extends "comics_list_app/base.html" %}
 
-{% block title %}編集画面{% endblock title %}
+{% block title %}
+    Edit Menu
+{% endblock title %}
 
 {% block content %}
-    {% if id %}
-        <h3 class="page-header">会員の編集</h3>
-        <form action="{% url 'comics_list_app:edit' id=id %}" method="post" class="form-horizontal" role="form">
-    {% else %}
-        <h3 class="page-header">会員の登録</h3>
-        <form action="{% url 'comics_list_app:add' %}" method="post" class="form-horizontal" role="form">
-    {% endif %}
-        {% csrf_token %}
-        {{ form.title }}
-        {{ form.volume }}
-        {{ form.username.as_hidden }}
-        <button type="submit" class="btn btn-primary">送信</button>
+    <div class="container">
+        <div class="form users-form">
+            <div class="form-body">
+                {% if id %}
+                    <h3 class="page-header">Edit</h3>
+                    <form action="{% url 'comics_list_app:edit' id=id %}" method="post" class="form-horizontal" role="form">
+                {% else %}
+                    <h3 class="page-header">Add</h3>
+                    <form action="{% url 'comics_list_app:add' %}" method="post" class="form-horizontal" role="form">
+                {% endif %}
+                    {% csrf_token %}
+                    <p>Title</p>
+                    {{ form.title }}
+                    <p>Volume</p>
+                    {{ form.volume }}
+                    {{ form.username.as_hidden }}
+                    {% if id %}
+                        <input type="submit" class="btn btn-primary" value="Update!">
+                    {% else %}
+                        <input type="submit" class="btn btn-primary" value="Add!">
+                    {% endif %}
 
-    </form>
-    </form>
-    <a href="{% url 'comics_list_app:index' %}" class="btn btn-default btn-sm">戻る</a>
+                </form>
+                </form>
+                <a href="{% url 'comics_list_app:index' %}" class="btn btn-default btn-sm">Return</a>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

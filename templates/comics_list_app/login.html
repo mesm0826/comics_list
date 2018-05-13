@@ -1,10 +1,24 @@
+{% extends "comics_list_app/base.html" %}
+{% block title %}
+Log In
+{% endblock title %}
 
-<form action="{% url 'comics_list_app:login' %}" method="post">
-    {% csrf_token %}
-    {% if next %}
-    <input type="hidden" name="next" value="{{ next }}" />
-    {% endif %}
-    <input type="text" name="username" placeholder="ユーザID">
-    <input type="password" name="password" placeholder="パスワード">
-    <button type="submit" name="Login">ログイン</button>
-</form>
+{% block content %}
+    <div class="container">
+        <div class="form users-form">
+            <div class="form-body">
+                <form action="{% url 'comics_list_app:login' %}" method="post">
+                    {% csrf_token %}
+                    {% if next %}
+                    <input type="hidden" name="next" value="{{ next }}" />
+                    {% endif %}
+                    <p>USER ID</p>
+                    <input type="text" name="username" placeholder="UserID">
+                    <p>PASSWORD</p>
+                    <input type="password" name="password" placeholder="Password">
+                    <input type="submit" name="Login" value="Log In">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
